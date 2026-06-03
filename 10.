@@ -1,0 +1,46 @@
+df <- data.frame(
+  hours = c(1,2,4,5,5,6,6,7,8,10,11,11,12,12,14),
+  score = c(64,66,76,73,74,81,83,82,80,88,84,82,91,93,89)
+)
+
+attach(df)
+
+scatter.smooth(hours, score,
+               main = "Hours studied vs. Exam Score")
+
+boxplot(score, main = "Boxplot for Score")
+
+boxplot(hours, main = "Boxplot for hours")
+
+model <- lm(score ~ hours)
+
+summary(model)
+
+Score <- 65.334 + 1.982 * (10)
+
+print(Score)
+
+pre_score <- c()
+
+i <- 1
+
+for(val in hours)
+{
+  pre_val <- 65.334 + 1.982 * val
+  pre_score[i] <- pre_val
+  i <- i + 1
+}
+
+print(pre_score)
+
+calres <- score - pre_score
+
+print(calres)
+
+plot(pre_score, calres)
+
+res <- resid(model)
+
+plot(fitted(model), res)
+
+abline(0,0)
